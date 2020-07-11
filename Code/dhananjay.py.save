@@ -1,0 +1,45 @@
+from csv import writer
+
+from dj import classifiction_report
+import os
+li=['Aid']
+
+entries = os.listdir('/home/dhananjay/Desktop/Learing/smni_eeg_data/a_1_co2a0000364')
+entries.remove('dhananjay.py')
+entries.remove('train.csv')
+'''for p in entries:
+	file=open(p,'r').readlines()
+	pkjj=[]
+	for v in file:
+		p=v.split()
+		pkjj.append([p[1],p[-1]])
+	for i in range(0,5):
+		pkjj.pop(0)
+	x=[]
+	head=[]
+	for i in range(0,256):
+		y=[]
+		head=[]
+		for j in range(0,64):
+			y.append(pkjj[i+j*256][1])
+		x.append(y)
+	with open('train.csv', 'a+') as write_obj:
+		csv_writer = writer(write_obj)
+		for y in x:
+			csv_writer.writerow(y)'''
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+dhananjay=pd.read_csv('train1.csv')
+temp=dhananjay
+Y=dhananjay['Aid']
+X=dhananjay.iloc[:,0:63]
+x_train,x_test,y_train,y_test=train_test_split(X,Y)
+pkjj=LogisticRegression().fit(x_train,y_train)
+y_pred = pkjj.predict(x_test)
+print classifiction_report(y_test, y_pred)
+temp
+'''gradient=[]
+gradient.append(sum/8931)
+print (gradient)'''
